@@ -1,22 +1,24 @@
 import React from "react";
 
-const todoList = [{
-    id: 1,
-    title: 'Learn React',
-  }, {
-    id: 2,
-    title: 'Learn Redux',
-  }, {
-    id: 3,
-    title: 'Learn React Router',
-  }];
-  
-const TodoList = () => {
-    return (
-        <ul>
-            {todoList.map(todo => <li key={todo.id}>{todo.title}</li>)}
-        </ul>
-    )
+import TodoListItem from "./TodoListItem";
+
+  function TodoList ({ todoList, onRemoveTodo }) {
+	return (
+		<div>
+
+		<ul>
+			{todoList.map((item) => {
+				return <TodoListItem 
+				title={item.fields.Title}
+				id={item.id}
+				key={item.id} 
+				onRemoveTodo={onRemoveTodo} />;
+				
+				
+			})}
+		</ul>
+		</div>
+	);
 }
 
 export default TodoList;
