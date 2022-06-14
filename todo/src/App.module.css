@@ -1,0 +1,11 @@
+.background {
+    background-color: rgb(127, 204, 255);
+    padding: 5px;
+    color: black;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: medium;
+    font-weight: bold;
+    @media only screen and (max-width: 600px) {
+        width: 100%;
+      }
+}
