@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
-import TodoList from "./TodoList";
-import AddTodoForm from "./AddTodoForm";
-import {BrowserRouter,Routes, Route }from "react-router-dom";
+import TodoList from "./components/TodoList";
+import AddTodoForm from "./components/AddTodoForm";
+import {BrowserRouter, Routes, Route }from "react-router-dom";
 import styles from "./App.module.css";
 
 function App() {
@@ -39,19 +39,20 @@ function App() {
 
 
   useEffect(() => {
-      localStorage.setItem("savedTodoList", JSON.stringify(todoList));
-    }, [todoList]);
-
-    function addTodo(newTodo) {
-      setTodoList([...todoList, newTodo]);
+    if (isLoading === false) {
+      localStorage.setItem('savedTodoList', JSON.stringify(todoList));
     }
+  }, [isLoading, todoList]);
 
-    function removeTodo(id) {
-      let newTodolist = todoList.filter((todo) => {
-        return todo.id !==id;
-      });
-      setTodoList(newTodolist);
-    }
+
+  const removeTodo = (id) => {
+		const filteredList = todoList.filter((todoListItem) => todoListItem.id !== id);
+		setTodoList(filteredList);
+	}
+
+  const addTodo = (newTodo) => {
+    setTodoList([...todoList, newTodo])
+  };
 
     return (
       <BrowserRouter>
