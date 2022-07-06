@@ -9,7 +9,7 @@ function App() {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    fetch(`https://api.airtable.com/v0/${process.env.REACT_APP_AIRTABLE_BASE_ID}/Default`, 
+    fetch(`https://api.airtable.com/v0/${process.env.REACT_APP_AIRTABLE_BASE_ID}/Default?view=Grid%20view&sort[0][field]=Title&sort[0][direction]=asc`, 
     {method: 'GET', 
     headers:{ Authorization: `Bearer ${process.env.REACT_APP_AIRTABLE_API_KEY}`
   }
@@ -17,6 +17,9 @@ function App() {
     .then((response) => response.json())
     .then((result) => 
     {
+      result.records.sort((objectA, objectB) =>
+						objectB.fields.Title.localeCompare(objectA.fields.Title)
+					);
       const airTabletodoList = [];
 
         for (const record of result.records) {
